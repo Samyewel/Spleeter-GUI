@@ -23,7 +23,8 @@ def load_settings():
 	return ""
 
 # save_settings:
-# -
+# - Writes the output folder path into the settings file so it can be used next
+#	time the GUI is opened.
 def save_settings(output_folder_path):
 	with open(SETTINGS_FILE, 'w') as f:
 		json.dump({"output_folder": output_folder_path}, f)
@@ -38,6 +39,8 @@ def run_spleeter():
 	button_run.config(text="Splitting...", state=tk.DISABLED)
 	run_conversion(command)
 
+# validate_inputs:
+# - Handles errors for when specific entries are not entered.
 def validate_inputs(audio_file_path, output_folder_path):
 	if not audio_file_path:
 		messagebox.showerror("Error", "Please select an audio file.")
@@ -49,7 +52,6 @@ def validate_inputs(audio_file_path, output_folder_path):
 		messagebox.showerror("Error", "Please select an output folder.")
 		return False
 	stem_count = stem_count_var.get()
-
 	return True
 
 def build_command(audio_file_path, codec, output_folder):
